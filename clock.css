@@ -1,0 +1,81 @@
+body {
+    font-family: monospace;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+fieldset {
+    border: 1px solid black;
+    padding-top: 0;
+}
+input {
+    position: relative;
+    top: 1px;
+}
+hr {
+    border-width: 0;
+    border-top: 1px solid black;
+    margin-bottom: 4px;
+}
+a {
+    cursor: pointer;
+    user-select: none;
+}
+#debug {
+    white-space: pre;
+}
+#clockContainer {
+    width: 100%;
+    height: 100%;
+    /* outline: 2px solid; */
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    margin: auto;
+    z-index: -1;
+}
+#crazyClock {
+    width: 100%;
+    height: 100%;
+}
+#moreInfo {
+    width: 360px;
+    visibility: hidden;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    z-index: 1;
+}
+#moreInfo *:not(:first-child) {
+    text-align: center;
+    margin: 6px 14px;
+}
+#currentTime {
+    font-size: 2em;
+    font-weight: bold;
+    position: absolute;
+    bottom: 4px;
+    left: 12px;
+}
+#settings {
+    position: absolute;
+    right: 8px;
+    bottom: 6px;
+}
+#settings fieldset {
+    visibility: hidden;
+    width: 128px;
+    margin-top: 4px;
+}
+#settingsToggle {
+    margin-top: 6px;
+    float: right;
+}
+#extras {
+    padding-top: 1px;
+    padding-bottom: 5px;
+}
+#extras hr {
+    margin-top: 7px;
+    margin-bottom: 5px;
+}

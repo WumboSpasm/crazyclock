@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Crazy Clock</title>
+        <link rel="stylesheet" href="clock.css">
+        <script defer src="clock-time.js"></script>
+        <script defer src="clock-meta.js"></script>
+        <script defer src="clock-hands.js"></script>
+        <meta charset="utf-8">
+    </head>
+    <body onload="clockDisplay();">
+        <div id="debug"></div>
+        
+        <div id="clockContainer">
+            <canvas id="crazyClock" width="1024" height="1024"></canvas>
+        </div>
+        
+        <fieldset id="moreInfo">
+            <legend>More Info</legend>
+            <h1>Crazy Clock</h1>
+            <h4>Version 1.0</h4>
+            <p>Clock hands guaranteed to be accurate only to the current day until further notice.</p>
+        </fieldset>
+        
+        <div id="currentTime"></div>
+        
+        <div id="settings">
+            <fieldset>
+                <legend>Clock</legend>
+                <input type="checkbox" id="yearHand" checked> Year <br>
+                <input type="checkbox" id="monthHand" checked> Month <br>
+                <input type="checkbox" id="dayHand" checked> Day <br>
+                <input type="checkbox" id="hourHand" checked> Hour <br>
+                <input type="checkbox" id="minuteHand" checked> Minute <br>
+                <input type="checkbox" id="secondHand" checked> Second <br>
+            </fieldset>
+            <fieldset>
+                <legend>Text</legend>
+                <input type="checkbox" id="dateText" checked> Date <br>
+                <input type="checkbox" id="timeText" checked> Time <br>
+                <input type="checkbox" id="msSecondText" checked> Millisecond <br>
+                <input type="checkbox" id="periodText" checked> AM/PM <hr>
+                <input type="checkbox" id="altText"> Alt Display <br>
+                <input type="checkbox" id="debugText"> Debug Stats
+            </fieldset>
+            <fieldset id="extras">
+                <legend>Extras</legend>
+                <label>Color:</label>
+                <select id="bgColor">
+                    <option>Green</option>
+                    <option>Blue</option>
+                    <option>Red</option>
+                    <option>Light</option>
+                    <option>Dark</option>
+                </select>
+                <hr>
+                <a id="saveSettings">Save</a> <br>
+                <a id="infoToggle">More Info</a>
+            </fieldset>
+            <a id="settingsToggle">Settings</a>
+        </div>
+    </body>
+</html>
