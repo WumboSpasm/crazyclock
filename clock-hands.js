@@ -7,13 +7,13 @@
 function clockDisplay() {
     let canvas = document.querySelector('#crazyClock'),
         clock = canvas.getContext('2d'),
-        timeData = [msYear, msMonth, msDay, msHour, msMinute, msSecond],
-        multiplierData = [msYearTotal, msMonthTotal, msDayTotal, msHourTotal, msMinuteTotal, msSecondTotal],
         prevHandMarker = -1;
     
     // Resizes the canvas to the entire viewport without distorting the output
-    canvas.width = window.innerWidth,
-    canvas.height = window.innerHeight;
+    if (canvas.width != window.innerWidth)
+        canvas.width = window.innerWidth;
+    if (canvas.height != window.innerHeight)
+        canvas.height = window.innerHeight;
     
     // Viewport-dependent variables
     let centerX = canvas.width / 2,
@@ -23,7 +23,8 @@ function clockDisplay() {
     clock.clearRect(0, 0, canvas.width, canvas.height);
     
     clock.lineWidth = (canvas.width + canvas.height) / 750,
-    clock.lineCap = 'round';
+    clock.lineCap = 'round',
+    clock.strokeStyle = styleFG;
     
     // Draws the beginning marker
     clock.beginPath();
@@ -32,7 +33,7 @@ function clockDisplay() {
     
     // Rotates a given hand by a certain amount of degrees
     function rotateHand(i) {
-        return (Math.PI / 180) * (timeData[i] * (360 / multiplierData[i]));
+        return (Math.PI / 180) * (ms[Object.keys(ms)[i + 1]] * (360 / ms.total[Object.keys(ms.total)[5 - i]]));
     }
     
     // Draws hand and at the endpoint of the preceding hand (or the center if one doesn't exist)

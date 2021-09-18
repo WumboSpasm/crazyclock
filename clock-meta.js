@@ -55,52 +55,45 @@ infoToggle.addEventListener('click', toggleInfo);
 
 // Changes the background based on selection
 let bgColor = document.querySelector('#bgColor'),
-    styleText,
+    styleFG,
     styleBG,
-    styleFS,
-    styleFilter;
+    styleFS;
 function changeColor() {
     switch (bgColor.selectedIndex) {
         case 1:
-            styleText   = '#000000',
-            styleBG     = '#b0d0ff',
-            styleFS     = '#b0d0ffcc',
-            styleFilter = 'initial';
+            styleFG = '#000000',
+            styleBG = '#b0d0ff',
+            styleFS = 'cc';
             break;
         case 2:
-            styleText   = '#000000',
-            styleBG     = '#ffb0d0',
-            styleFS     = '#ffb0d0cc',
-            styleFilter = 'initial';
+            styleFG = '#000000',
+            styleBG = '#ffb0d0',
+            styleFS = 'cc';
             break;
         case 3:
-            styleText   = '#000000',
-            styleBG     = '#ffffff',
-            styleFS     = '#ffffffcc',
-            styleFilter = 'initial';
+            styleFG = '#000000',
+            styleBG = '#ffffff',
+            styleFS = 'cc';
             break;
         case 4:
-            styleText   = '#ffffff',
-            styleBG     = '#000000',
-            styleFS     = '#000000aa',
-            styleFilter = 'invert(1)';
+            styleFG = '#ffffff',
+            styleBG = '#000000',
+            styleFS = 'aa';
             break;
         default:
-            styleText   = '#000000',
-            styleBG     = '#d0ffb0',
-            styleFS     = '#d0ffb0cc',
-            styleFilter = 'initial';
+            styleFG = '#000000',
+            styleBG = '#d0ffb0',
+            styleFS = 'cc';
             break;
     }
     
-    document.body.style.color = styleText,
+    document.body.style.color = styleFG,
     document.body.style.backgroundColor = styleBG,
-    document.querySelector('#moreInfo').style.backgroundColor = styleFS,
-    document.querySelector('#crazyClock').style.filter = styleFilter,
+    document.querySelector('#moreInfo').style.backgroundColor = styleBG + styleFS;
     
     settingsColor = document.querySelectorAll('#settings fieldset');
     for (let i = 0; i < settingsColor.length; i++)
-        settingsColor[i].style.backgroundColor = styleFS;
+        settingsColor[i].style.backgroundColor = styleBG + styleFS;
 }
 changeColor();
 bgColor.addEventListener('input', changeColor);
@@ -178,65 +171,65 @@ function textDisplay() {
     if (!document.querySelector('#altText').checked)
         timeText.textContent 
         = (document.querySelector('#dateText').checked
-            ? year + '-'
-            + prependZero(month + 1, 2) + '-'
-            + prependZero(dayOfMonth, 2) + ' ' : '')
+            ? time.year + '-'
+            + prependZero(time.month + 1, 2) + '-'
+            + prependZero(time.dayOfMonth, 2) + ' ' : '')
         + (document.querySelector('#timeText').checked
-            ? prependZero(hour, 2) + ':'
-            + prependZero(minute, 2) + ':'
-            + prependZero(second, 2) : '')
+            ? prependZero(time.hour, 2) + ':'
+            + prependZero(time.minute, 2) + ':'
+            + prependZero(time.second, 2) : '')
         + ((document.querySelector('#msSecondText').checked 
         && !document.querySelector('#msSecondText').disabled) ? '.'
-            + prependZero(msSecond, 3) : '')
+            + prependZero(ms.second, 3) : '')
         + ((document.querySelector('#periodText').checked
         && !document.querySelector('#periodText').disabled) ? ' '
-            + period : '')
+            + time.period : '')
     else
         timeText.textContent 
         = (document.querySelector('#dateText').checked
-            ? (month + 1) + '/'
-            + dayOfMonth + '/'
-            + year + ' ' : '')
+            ? (time.month + 1) + '/'
+            + time.dayOfMonth + '/'
+            + time.year + ' ' : '')
         + (document.querySelector('#timeText').checked
-            ? altHour(hour) + ':'
-            + prependZero(minute, 2) + ':'
-            + prependZero(second, 2) : '')
+            ? altHour(time.hour) + ':'
+            + prependZero(time.minute, 2) + ':'
+            + prependZero(time.second, 2) : '')
         + ((document.querySelector('#msSecondText').checked 
         && !document.querySelector('#msSecondText').disabled) ? '.'
-            + prependZero(msSecond, 3) : '')
+            + prependZero(ms.second, 3) : '')
         + ((document.querySelector('#periodText').checked
         && !document.querySelector('#periodText').disabled) ? ' '
-            + period : '');
+            + time.period : '');
     
     // Handles the debug display
     if (document.querySelector('#debugText').checked)
-        debug.textContent = 'SEC ' + msSecond + '\n'
-                          + 'TOT ' + msSecondTotal + '\n'
-                          + 'FRC ' + (msSecond / msSecondTotal).toFixed(9) + '\n\n'
+        debug.textContent = 'SEC ' + ms.second + '\n'
+                          + 'TOT ' + ms.total.second + '\n'
+                          + 'FRC ' + (ms.second / ms.total.second).toFixed(9) + '\n\n'
                           
-                          + 'MIN ' + msMinute + '\n'
-                          + 'TOT ' + msMinuteTotal + '\n'
-                          + 'FRC ' + (msMinute / msMinuteTotal).toFixed(9) + '\n\n'
+                          + 'MIN ' + ms.minute + '\n'
+                          + 'TOT ' + ms.total.minute + '\n'
+                          + 'FRC ' + (ms.minute / ms.total.minute).toFixed(9) + '\n\n'
                           
-                          + 'HOU ' + msHour + '\n'
-                          + 'TOT ' + msHourTotal + '\n'
-                          + 'FRC ' + (msHour / msHourTotal).toFixed(9) + '\n\n'
+                          + 'HOU ' + ms.hour + '\n'
+                          + 'TOT ' + ms.total.hour + '\n'
+                          + 'FRC ' + (ms.hour / ms.total.hour).toFixed(9) + '\n\n'
                           
-                          + 'DAY ' + msDay + '\n'
-                          + 'TOT ' + msDayTotal + '\n'
-                          + 'FRC ' + (msDay / msDayTotal).toFixed(9) + '\n\n'
+                          + 'DAY ' + ms.day + '\n'
+                          + 'TOT ' + ms.total.day + '\n'
+                          + 'FRC ' + (ms.day / ms.total.day).toFixed(9) + '\n\n'
                           
-                          + 'MON ' + msMonth + '\n'
-                          + 'TOT ' + msMonthTotal + '\n'
-                          + 'FRC ' + (msMonth / msMonthTotal).toFixed(9) + '\n\n'
+                          + 'MON ' + ms.month + '\n'
+                          + 'TOT ' + ms.total.month + '\n'
+                          + 'FRC ' + (ms.month / ms.total.month).toFixed(9) + '\n\n'
                           
-                          + 'YEA ' + msYear + '\n'
-                          + 'TOT ' + msYearTotal + '\n'
-                          + 'FRC ' + (msYear / msYearTotal).toFixed(9) + '\n\n'
+                          + 'YEA ' + ms.year + '\n'
+                          + 'TOT ' + ms.total.year + '\n'
+                          + 'FRC ' + (ms.year / ms.total.year).toFixed(9) + '\n\n'
                           
-                          + 'OFF ' + currentTime.getTimezoneOffset() + '\n\n'
+                          + 'OFF ' + now().getTimezoneOffset() + '\n\n'
                           
-                          + 'ALL ' + msTime;
+                          + 'ALL ' + ms.time;
     else
         debug.textContent = '';
     
