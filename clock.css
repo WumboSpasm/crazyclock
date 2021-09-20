@@ -5,7 +5,10 @@ body {
     padding: 0;
 }
 fieldset {
+    visibility: hidden;
     border: 1px solid black;
+    width: 128px;
+    margin-top: 4px;
     padding-top: 0;
 }
 input {
@@ -61,11 +64,6 @@ a {
     position: absolute;
     right: 8px;
     bottom: 6px;
-}
-#settings fieldset {
-    visibility: hidden;
-    width: 128px;
-    margin-top: 4px;
 }
 #settingsToggle {
     margin-top: 6px;

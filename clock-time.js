@@ -4,8 +4,8 @@
     Handles time-keeping variables.
 */
 
-// Variables declared in the global scope so they can be accessed by other scripts
 let now = () => { return new Date(/*'1970-01-01T00:00:00.000'*/) },
+    // Generic time data
     time = {
         get year()          { return now().getFullYear() },
         get month()         { return now().getMonth() },
@@ -26,6 +26,7 @@ let now = () => { return new Date(/*'1970-01-01T00:00:00.000'*/) },
         get hour()          { return this.time % this.total.hour },
         get minute()        { return this.time % this.total.minute },
         get second()        { return now().getMilliseconds() },
+        // Total milliseconds required for each unit to increase by 1
         total: {
             second:         1000,
             minute:         60000,

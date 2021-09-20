@@ -18,17 +18,23 @@ function clockDisplay() {
     // Viewport-dependent variables
     let centerX = canvas.width / 2,
         centerY = canvas.height / 2,
-        lineSize = (canvas.width < canvas.height) ? (canvas.width / -12) : (canvas.height / -12);
+        lineSize = 0,
+        hands = document.querySelectorAll('#settings fieldset:first-child input');
+    
+    for (let i = 0; i < hands.length; i++)
+        if (hands[i].checked) lineSize++;
+    
+    lineSize = Math.min(canvas.width, canvas.height) / (-lineSize * 2);
     
     clock.clearRect(0, 0, canvas.width, canvas.height);
     
-    clock.lineWidth = (canvas.width + canvas.height) / 750,
+    clock.lineWidth = Math.max(1, Math.min(canvas.width, canvas.height) / 250);
     clock.lineCap = 'round',
     clock.strokeStyle = styleFG;
     
     // Draws the beginning marker
     clock.beginPath();
-    clock.arc(centerX, centerY, (canvas.width + canvas.height) / 1000, 0, Math.PI * 2);
+    clock.arc(centerX, centerY, clock.lineWidth / 1.5, 0, Math.PI * 2);
     clock.stroke();
     
     // Rotates a given hand by a certain amount of degrees

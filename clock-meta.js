@@ -23,7 +23,7 @@ function altHour(hour) {
 }
 
 // Displays/hides the settings GUI if the settings text is clicked; also handles the infobox
-let settings = document.querySelectorAll("#settings > fieldset"),
+let settings = document.querySelectorAll("#settings fieldset"),
     settingsToggle = document.querySelector('#settingsToggle'),
     infobox = document.querySelector("#moreInfo"),
     infoToggle = document.querySelector('#infoToggle');
@@ -56,44 +56,43 @@ infoToggle.addEventListener('click', toggleInfo);
 // Changes the background based on selection
 let bgColor = document.querySelector('#bgColor'),
     styleFG,
-    styleBG,
-    styleFS;
+    styleBG;
 function changeColor() {
     switch (bgColor.selectedIndex) {
         case 1:
             styleFG = '#000000',
-            styleBG = '#b0d0ff',
-            styleFS = 'cc';
+            styleBG = '#b0d0ff';
             break;
         case 2:
             styleFG = '#000000',
-            styleBG = '#ffb0d0',
-            styleFS = 'cc';
+            styleBG = '#ffb0d0';
             break;
         case 3:
             styleFG = '#000000',
-            styleBG = '#ffffff',
-            styleFS = 'cc';
+            styleBG = '#ffffff';
             break;
         case 4:
             styleFG = '#ffffff',
-            styleBG = '#000000',
-            styleFS = 'aa';
+            styleBG = '#000000';
             break;
         default:
             styleFG = '#000000',
-            styleBG = '#d0ffb0',
-            styleFS = 'cc';
+            styleBG = '#d0ffb0';
             break;
     }
     
     document.body.style.color = styleFG,
     document.body.style.backgroundColor = styleBG,
-    document.querySelector('#moreInfo').style.backgroundColor = styleBG + styleFS;
+    document.querySelector('#moreInfo').style.backgroundColor = styleBG + 'cc';
     
-    settingsColor = document.querySelectorAll('#settings fieldset');
-    for (let i = 0; i < settingsColor.length; i++)
-        settingsColor[i].style.backgroundColor = styleBG + styleFS;
+    settingsColor = document.querySelectorAll('fieldset');
+    for (let i = 0; i < settingsColor.length; i++) {
+        settingsColor[i].style.backgroundColor = styleBG + 'cc';
+        settingsColor[i].style.borderColor = styleFG;
+    }
+    separatorColor = document.querySelectorAll('hr');
+    for (let i = 0; i < separatorColor.length; i++)
+        separatorColor[i].style.borderTop = '1px solid ' + styleFG;
 }
 changeColor();
 bgColor.addEventListener('input', changeColor);
